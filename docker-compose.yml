@@ -1,38 +1,18 @@
 version: '3.9'
 
 services:
-  # db:
-  #   image: postgres:15
-  #   environment:
-  #     - POSTGRES_USER=odoo
-  #     - POSTGRES_PASSWORD_FILE=/run/secrets/postgresql_password
-  #     - POSTGRES_DB=postgres
-  #     - PGDATA=/home/postgres/data
-  #   volumes:
-  #     - ./v/postgres/data:/home/postgres/data
-  #   secrets:
-  #     - postgresql_password
   odoo:
-    # depends_on:
-    #   - db
     image: odoo:17
     container_name: rkt-odoo
     restart: ${RESTART_POLICY}
-    command: ["-i", "base", "-d", "odoo"]
+    # command: ["-i", "base", "-d", "odoo"]
     volumes:
       - ${ODOO_CONFIG_PATH}:/etc/odoo/odoo.conf
       - ${ODOO_EXTRA_ADDONS_PATH}:/mnt/extra-addons
     ports:
       - "8069:8069"
     environment:
-      - POSTGRES_DB=${POSTGRES_ODOO_DB}
-      - POSTGRES_USER=${POSTGRES_ODOO_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_ODOO_PASSWORD}
+      # - POSTGRES_DB=${POSTGRES_ODOO_DB}
+      # - POSTGRES_USER=${POSTGRES_ODOO_USER}
+      # - POSTGRES_PASSWORD=${POSTGRES_ODOO_PASSWORD}
       - DB_PORT_5432_TCP_ADDR
-      # - PASSWORD_FILE=/run/secrets/postgresql_password
-#     secrets:
-#       - postgresql_password
-
-# secrets:
-#   postgresql_password:
-#     file: odoo_pg_pass

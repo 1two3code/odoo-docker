@@ -9,6 +9,7 @@ services:
     volumes:
       - ${ODOO_CONFIG_PATH}:/etc/odoo/odoo.conf
       - ${ODOO_EXTRA_ADDONS_PATH}:/mnt/extra-addons
+      - ${ODOO_FILESTORE_PATH}:/var/lib/odoo/filestore
     ports:
       - "8069:8069"
     environment:
